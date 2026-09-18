@@ -1,0 +1,81 @@
+@import url("./gill_sans/gill_sans.css");
+.p_grid_image {
+	width: 45%;
+	float: left;
+}
+.p_grid_title {
+	width: 50%;
+	float: right;
+}
+.p_img {
+	width: 100%;
+}
+.p_number {
+	text-align: center;
+	font-weight: bold;
+}
+.p_title {
+	text-align: center;
+	font-weight: bold;
+}
+.p_subtitle {
+	font-weight: 600;
+	text-align: center;
+}
+.p_newline {
+	clear: both;
+}
+.hr_newline {
+	width: 30%; 
+	align: center;
+}
+
+.gold_metallic {
+	color: #D4AF37;
+}
+.header_img {
+	float: left;
+	width: 40px;
+	height: 40px;
+	border: 0;
+	margin-right: 10px;
+}
+.header_a {
+	text-decoration: none;
+}
+.header_nav {
+	text-align: center; 
+	margin-bottom: 20px;
+	display: inline;
+	float: right;
+}
+.footer_channel_name {
+	display: inline;
+	float: left;
+}
+.p_section {
+	width: 90%;
+	margin: 2vw;
+}
+pre {
+	font-family:'Gill Sans';
+	white-space: pre-wrap !important;
+}
+.lang_label {
+	 background-color: green; 
+	 color: white; 
+	 font-size: smaller;
+	 padding-left: 1ex;
+	 padding-right: 1ex;
+}
+h2, h3 {
+	text-align: center;
+}
+pre i {
+	color: green;
+	font-weight: bold;
+	font-size: larger;
+}
+pre div {
+	display: inline;
+}
