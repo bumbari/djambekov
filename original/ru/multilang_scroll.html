@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Synchronized Multi-Language Scroll</title>
+<style>
+    :root {
+        --bg: #faf8f4; --fg: #222; --muted: #8a8478; --line: #d9d3c7;
+        --accent: #8c3b2a; --hl: rgba(140, 59, 42, .09); --head: #f1ede5;
+        color-scheme: light dark;
+    }
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --bg: #1b1a18; --fg: #e8e4dc; --muted: #8f897c; --line: #37342f;
+            --accent: #d98a72; --hl: rgba(217, 138, 114, .13); --head: #23211e;
+        }
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body {
+        background: var(--bg); color: var(--fg);
+        font-family: Georgia, "Times New Roman", serif;
+        overflow: hidden;              /* the page never scrolls; the panes do */
+    }
+    .scroll-container {
+        display: flex; flex-direction: column;
+        height: 100vh; height: 100dvh;
+    }
+    .column {
+        display: flex; flex-direction: column;
+        flex: 1 1 0; min-height: 0;    /* three equal parts of the screen height */
+        border-bottom: 2px solid var(--line);
+    }
+    .column:last-child { border-bottom: 0; }
+
+    /* Title bar: outside the scroll pane, so it is always visible */
+    .title {
+        flex: none;
+        display: flex; align-items: baseline; justify-content: space-between;
+        padding: .35rem max(1.25rem, 8vw);
+        background: var(--head); border-bottom: 1px solid var(--line);
+    }
+    .title h2 {
+        margin: 0; font-size: 1rem; letter-spacing: .04em; color: var(--accent);
+    }
+    .tag {
+        font: 600 .7rem/1 system-ui, sans-serif; color: var(--muted); letter-spacing: .05em;
+    }
+
+    .pane {
+        position: relative;            /* paragraph offsetTop is measured from here */
+        flex: 1 1 0; min-height: 0;
+        overflow-y: auto;
+        padding: .6rem max(1.25rem, 8vw) 0;
+        scrollbar-width: thin;
+        outline: none;
+    }
+    .pane p {
+        margin: 0 0 .7rem; padding: 0 .5rem; margin-left: -.5rem; margin-right: -.5rem;
+        line-height: 1.55; font-size: 1.02rem; max-width: 70ch;
+        border-radius: 4px; transition: background .15s;
+    }
+    .pane p.active { background: var(--hl); }
+    .pane a { color: var(--accent); word-break: break-all; }
+    /* Lets even the last paragraph be scrolled up to the top of its pane */
+    .tail { height: 0; }  /* sized by the script */
+</style>
+</head>
+<body>
+
+    <div class="scroll-container">
+        <section class="column" id="idSectionChechen" lang="ce">
+            <header class="title">
+                <h2>БОРЗ</h2>
+                <span class="tag">Нохчийн</span>
+            </header>
+            <div class="pane" tabindex="0">
+                <p>Цхьа борз хилла гуттар юучух юьзна. Кураяьллачу барзана хьаьжа цӀа яха еза ша аьлла дагадеана. ТӀаккха коьллаш юккъе а яьлла, коьртах яраш а хьарчийна, хьаьжа цӀа яха новкъа яьлла иза.</p>
+                <p>Оьхаш, генна а яьлла йоьдаш хилла борз. Йоьда-йоьдуш вирана тӀекхаьчна иза. Кхераделла вир дӀаиккхина.</p>
+                <p>Вир, хьо дӀа ма лелха, хьо схьа ма лелха, со дикачу новкъа араяьлла. Со хьаьжа цӀа яха араяьлла, сох кхерам бац хьуна, аьлла барзо. Цо и аьлча, шен метта яжа дӀахӀоьттина вир.</p>
+                <p>ТӀаккха йоьда-йоьдуш тарана тӀекхаьчна хьаьжа цӀа йоьдуш йолу борз. Барзах кхера а белла, ту дӀаиккхина. Юьзана ша хӀун дийр ду а ца хууш йолчу барзо аьлла:</p>
+                <p>- Хьо дӀа а ма лелха, ту, схьа а ма лелха, ту, со дикачу новкъа араяьлла хьуна, аса хӀумма а дийр дац хьуна, сох ма кхера.</p>
+                <p>Ту бажа дӀахӀоьттина, цо и аьлча.</p>
+                <p>ТӀаккха дӀайоьдаш йолу борз говрана тӀекхаьчна. Хьалха вир а, ту а санна, кхера а елла, дӀаиккхина говр. Амма барзо сацийна иза:</p>
+                <p>- Хьо дӀа а ма лелха, говр, хьо схьа а ма лелха, говр, сох кхерам бац хьуна, со дикачу новкъа араяьлла, со-м хьаьжа цӀа йоьдаш яй, - аьлла.</p>
+                <p>Говр яжа дӀахӀоьттина.</p>
+                <p>Йоьда-йоьдуш гена яьлча, борз мац а елла, гӀел а елла, ша ара беккхинчу некьана дохкохъяьлла. Цунна дагадеана, юха а йирзина, шен коьртах йохку яраш дӀа а кхиссина, вир а, ту а, говр а яа. Цо ша-шега аьлла: "Суна хӀун хьашт ду хьаьжа цӀа яха. Цулла а сайна говран жижиг, теран жижиг, виран жижиг а дууш Ӏаьн яй со".</p>
+                <p>Эццигахь юха а йирзина, цӀехьа йолаелла борз. СхьайогӀуш говрана тӀекхаьчна иза. Говро барзе аьлла:</p>
+                <p>- Хьуо хьаьжа цӀа йоьду ца бахара ахьа, хьуо дикачу новкъа йоьду ца бахара ахьа?</p>
+                <p>- Со дера йогӀу дохко а яьлла. Сайна виран жижиг, теран жижиг, говран жижиг дууш Ӏен яй со, - аьлла барзо.</p>
+                <p>- Делахь дика ду хӀета, - аьлла говро, - хьо ялалца а, хьо елча а яал хир ю-кха со хьуна, айхьа со яалай, сан когах боллу хьостам схьабаккхахь, сагатдо сан цо.</p>
+                <p>Уллий а яхана, барзо ког схьалаьцна:</p>
+                <p>- Муьлха ког бу хьан иза? - аьлла. Борз улли йоггӀушехь, коьртах мийра тоьхна, говро кхоьссина дӀаяхийтина иза.</p>
+                <p>Шена чу са даллалц йоьжна а Ӏиллина, хьала а гӀаьттина, юха а новкъаяьлла 6орз. Йоьдуш тарана тӀекаьчна иза. Юха йогӀу борз а гина, таро аьлла:</p>
+                <p>- Хьо юха ма йогӀу, борз, хьуо дикачу новкьа яха араяьлла ца бахара ахьа?</p>
+                <p>- Со-м дохкояьлла, сайна теран жижиг, виран жижиг а дууш Ӏай яй со, оцу дуьнен тӀе йоьдачул, - аьлла барзо.</p>
+                <p>- Делахь дика ду хӀета, со хьуна яллалц баъал а, елча баъал а хир бу, хьалха сан маӀан чохь боллуш болу нӀаьна схьабаккхахь, - аьлла, дехар дина таро.</p>
+                <p>- Хьагайтал, мичахь бу и? - аьлла, улле еана борз. Иза хьалхайоллушехь коьртах маӀаш тоьхна Ӏункар хӀотӀийна иза таро.</p>
+                <p>Ша метта еача, меллаша хьала а гӀаьттина, юха новкъа яьлла борз. Йоьдуш, вирана тӀекхаьчна иза. Виро аьлла:</p>
+                <p>- Хьо юха ма йогӀу, борз, хьуо хьаьжа цӀа яха яьлла ца бахара ахьа, хьуо дикачу новкъа йоьдуш ю ца бахара ахьа?</p>
+                <p>- Со-м дохко яьлла юха ма йогӀу, цуллий а сайна виран жижиг а дууш Ӏаьн яй со, - аьлла барзо.</p>
+                <p>- Делахь дика ду, со хьуна яллалц а, елча а яъал хир ю хьуна. Цкъа хьалха хьалларчу барза тӀе а яьлла, пихмоллин илли алийтахь соьга, - дехар дина виро. Шега тӀехьа я хьалха яла ца аларна хӀумма а шек ца яьллачу барзо бакъо елла:</p>
+                <p>- Алахь, делахь илли а.</p>
+                <p>ТӀаккха барз тӀе а яьлла, виро мохь хьакхна:</p>
+                <p>- Н-на-на-на-на-на, - аьлла.</p>
+                <p>И мохь хезна нахана. "Ва-а, варраш дойу вай", - аьлла, орца а даьлла, наха шайн вир дӀадигна, ткъа барзана баьхьанаш, белаш, гӀожмаш йиттина, эккхийна.</p>
+                <p>ТӀаккха цара ша эккхийча, хьуьнах а яхана, цхьана дуькъачу Ӏинчу охьа а хиъна, йилхина борз:</p>
+                <p>- АхӀий, ахӀий, со хьаьжан цӀа яха хьаьжа вацарий, со говран хьастам хьабаккха пхьар а вацарий, теран маӀан чуьра нӀаьна хьабаккха лор а вацарий, пихмоллин иллига ладегӀа замо а вацарий, - ахӀий, ахӀий, - аьлла, кхин а гӀар айина хьуьнан чохь барзо.</p>
+                <p>Царна гӀалдий-булдий, вайна кӀайн божжий, мозан Ӏайггий.</p>
+                <div class="tail"></div>
+            </div>
+        </section>
+        <section class="column" id="idSectionRussian" lang="ru">
+            <header class="title">
+                <h2>Волк-паломник</h2>
+                <span class="tag">Русский</span>
+            </header>
+            <div class="pane" tabindex="0">
+                <p>Жил-был волк, который не знал, что такое голод. Он всегда был весел, доволен собой и своим житьем-бытьем. Возгордившись, волк решил отправиться в паломничество. Он забрался в кустарник, обмотал себе голову растениями, сделав таким образом что-то вроде чалмы, и в таком виде отправился в путь.</p>
+                <p>Он шел долго, и уже ушел от родных мест на приличное расстояние. По пути ему встретился осел. Испугавшись, тот метнулся в сторону.</p>
+                <p>– Осел, ты не шарахайся меня, я сейчас на праведном пути – решил совершить паломничество. Тебе меня бояться нечего, – произнес волк. Услышав эти слова, осел вернулся на прежнее место и принялся щипать траву.</p>
+                <p>А волк тем временем отправился дальше. По пути ему встречается бык. Испугавшись волка, бык отскочил в сторону. А волк, как всегда, пребывающий в сытости, произнес:</p>
+                <p>– Ты, бык, не сторонись меня. Я нахожусь на праведном пути, и я тебя не трону. Не бойся меня.</p>
+                <p>Услышав эти слова, бык спокойно принялся пастись.</p>
+                <p>А волк продолжил свой путь. Через некоторое время на его пути встретился конь. Также, как осел и бык, конь испугался, увидев волка, и отскочил в сторону. Но волк остановил его:</p>
+                <p>– Ты чего от меня шарахаешься, конь? Ты не должен меня бояться, потому что я выбрал праведный путь - решил отправиться в паломничество.</p>
+                <p>Конь успокоился и начал пастись.</p>
+                <p>Чем дальше уходил волк от родных мест, тем больше он ощущал усталость и голод, и на ум ему приходили мысли о ненужности предпринятого им пути. Он подумал: «А не вернуться ли мне обратно, снять с головы эту чалму из травы и съесть осла, быка и коня? Зачем мне нужно это паломничество? Лучше я буду вдоволь есть мясо и жить себе преспокойно».</p>
+                <p>Подумав немного, волк решил вернуться домой. Он снова наткнулся на коня. Тот говорит волку:</p>
+                <p>– Разве ты не собирался в паломничество? Разве не ты говорил, что встал на праведный путь?</p>
+                <p>– Я передумал. Лучше я буду жить дома и есть мясо коня, быка и осла, – ответил волк.</p>
+                <p>– Хорошо, – ответил конь. – Ты можешь питаться моим мясом до конца своих дней. Но прежде чем ты съешь меня, вытащи гвоздь из моего копыта – нога очень болит.</p>
+                <p>Приблизившись к коню, волк спросил:</p>
+                <p>– В каком копыте у тебя гвоздь? Как только волк приблизился, конь, изловчившись, ударил его по голове копытом и отбросил в сторону.</p>
+                <p>Долго лежал волк, пока не пришел в себя. Потом, поднявшись, снова отправился в дорогу. По пути он встретил быка. Заметив возвращающегося волка, бык спросил:</p>
+                <p>– Почему ты вернулся, волк? Ты же говорил, что встал на праведный путь…</p>
+                <p>– Я передумал. Лучше я буду питаться мясом быка и осла, чем отправляться на край земли, – ответил волк.</p>
+                <p>– Ладно, ты можешь есть мое мясо до конца своей жизни и после нее, только прежде чем ты начнешь меня есть, вытащи червя из моего рога, – попросил бык.</p>
+                <p>– Покажи, где он находится? – с этими словами волк приблизился к быку. Как только волк приблизился, бык сильно ударил его рогами и отбросил в сторону.</p>
+                <p>Придя в себя, волк медленно встал, и снова продолжил свой путь домой. По пути он встретил осла. Тот говорит волку:</p>
+                <p>– Почему ты возвращаешься, волк? Разве не ты говорил, что отправляешься в паломничество, что встал на праведный путь?</p>
+                <p>– Я передумал и решил вернуться обратно. Лучше я буду жить дома и есть ослиное мясо, – ответил волк.</p>
+                <p>– Хорошо, если так, – ответил осел. – Ты можешь питаться моим мясом до конца своих дней. Только позволь мне напоследок взобраться вон на ту гору и исполнить песню Пих-муллы, – попросил осел. Волк, которому не предложили приблизиться ни к рогам, ни к копытам, ни о чем не подозревая, разрешил ослу взобраться на гору:</p>
+                <p>– Ладно. Спой свою песню.</p>
+                <p>Взобравшись на гору, осел протрубил:</p>
+                <p>– И-а-а-а, и-а-а-а-а!</p>
+                <p>Люди услышали голос осла. «Наши ослы в опасности!» – с такими словами, они кинулись на помощь ослу и забрали его домой, а волка с помощью палок, мотыг и лопат прогнали прочь.</p>
+                <p>Убежав от преследователей, волк отправился в лесную чащу, прилег на траву и горько заплакал:</p>
+                <p>– Ой, горе мне! Горе! Я ведь не хаджа, чтобы отправляться в паломничество, я не кузнец, чтобы вытаскивать гвоздь из конского копыта, я не врач, чтобы вытаскивать червя из бычьего рога, я не гость, чтобы слушать песню осла. О, горе мне! Так он плакал в лесной чаще, и его жалобный вой долго был слышен далеко вокруг.</p>
+                <p>(Перевод Тамары Чагаевой)</p>
+                <div class="tail"></div>
+            </div>
+        </section>
+        <section class="column" id="idSectionEnglish" lang="en">
+            <header class="title">
+                <h2>WOLF</h2>
+                <span class="tag">English</span>
+            </header>
+            <div class="pane" tabindex="0">
+                <p>Once upon a time, there was a wolf who had never known hunger. He always rejoiced, happy with himself and with his life. He grew so proud that he decided to go on a pilgrimage. He wrapped his head in plants, making something like a turban, and left on the pilgrimage.</p>
+                <p>He travelled for a long time, far away from his native land. Along the way, he met a donkey. Frightened, the donkey jumped out of the way.</p>
+                <p>"Don’t bolt away from me, donkey. I am following the righteous path now, I've decided to go on a pilgrimage. You have nothing to fear from me," the wolf said. When he heard these words, the donkey went back to his grazing spot and started nibbling the grass.</p>
+                <p>Meanwhile, the wolf walked on. Along the way he met an ox. Afraid of the wolf, the ox jumped aside. But the wolf was full as always. He didn’t want to eat the ox. He said:</p>
+                <p>“Ox, don’t run away from me. I am following the righteous path, and I won’t touch you. Don’t be afraid of me.”</p>
+                <p>When he heard these words, the ox calmly went back to grazing.</p>
+                <p>The wolf continued on his way. Soon after he met a horse. Just like the donkey and the ox, the horse was afraid at first, and jumped out of the way. But the wolf reassured him:</p>
+                <p>“Why are you running away from me, horse? You shouldn’t be afraid of me, because I have chosen the righteous path. I have decided to go on a pilgrimage.”</p>
+                <p>The horse went back to grazing happily.</p>
+                <p>The farther the wolf went from his native land, the more tired and hungry he felt, and he began to wonder if he was wasting his time on this pilgrimage. He thought to himself: "Maybe I should turn back, take this rag off my head and eat the donkey, the ox, and the horse? What do I need this pilgrimage for? I would be better off eating my fill and having a quiet life."</p>
+                <p>He thought for a while, and then decided to return home. He come across the horse again. The horse said to the wolf:</p>
+                <p>“So you decided not to go on the pilgrimage after all? But didn’t you just say that you were stepping on the righteous path?”</p>
+                <p>“I changed my mind. I decided that I would be better off staying at home and eating the meat of the horse, the ox, and the donkey,” the wolf answered.</p>
+                <p>“Fine,” said the horse. “You can live off my meat till the end of your days. But before you eat me, please remove this nail from my horseshoe. My foot hurts terribly.”</p>
+                <p>The wolf came closer to the horse and asked:</p>
+                <p>“Which one of your feet has a nail stuck in it?” As soon as the wolf got close enough, the horse deftly kicked him in the head with his iron-shod foot.</p>
+                <p>The wolf lay prostrate for a long time before he came round. Then he got up and walked on. He met the ox along the way. When the ox noticed the wolf, returning earlier than he expected, the ox asked:</p>
+                <p>“Why did you return, wolf? You said that you were following the righteous path.”</p>
+                <p>“I changed my mind. I am better off feeding on the meat of oxen and donkeys than travelling to the end of the Earth,” the wolf answered.</p>
+                <p>“Fine, you can feast on me till the end of your life and everafter, I only ask that before you start eating me, you take this worm out of my horn,” the ox said.</p>
+                <p>“Just show me where it is,” the wolf said and came up to the ox. As soon as the wolf got close, the ox butted him with his horns and threw him to the ground.</p>
+                <p>When the wolf regained consciousness, he stood up slowly and continued his journey home. Along the way, he met the donkeys. The donkey asked the wolf:</p>
+                <p>“Why are you coming back, wolf? Didn’t you say that you were on a pilgrimage and that you were on the righteous path?”</p>
+                <p>“I changed my mind and decided to return home. I will live better at home, eating donkey meat,” the wolf answered.</p>
+                <p>“Well, if that’s the way it is,” the donkey replied, “you can feast on me for the rest of your life. Just give me a moment to climb up that mountain and to sing my last song,” the donkey asked. The wolf, who was not asked to go anywhere near horns or hooves, suspecting nothing, allowed the donkey to climb the mountain.</p>
+                <p>“Sing your song then.”</p>
+                <p>When he reached the mountaintop, the donkey began to bray:</p>
+                <p>“Hee-haw, hee-haw!”</p>
+                <p>People heard the donkey's voice. “Our donkeys are in danger!” they shouted, and ran to rescue the ass and take him home, while they chased the wolf away with sticks, hoes and spades.</p>
+                <p>The wolf ran away from his pursuers and reached the forest, then lay down on the grass and cried bitterly:</p>
+                <p>“Oh, woe to me! I am not hadji, to go on a pilgrimage. I am no blacksmith, to wrest nails from horseshoes. I am no doctor, to extract worms from oxen horns. Nor am I a guest, to listen to donkey's singing. Oh, woe to me!” Thus he cried in the depth of forest, and his mournful howling was heard for a long time and from far away.</p>
+                <p><a href="https://t-chagaeva.livejournal.com/18281.html" target="_blank" rel="noopener">https://t-chagaeva.livejournal.com/18281.html</a></p>
+                <div class="tail"></div>
+            </div>
+        </section>
+    </div>
+
+<script>
+(function () {
+    const panes = Array.from(document.querySelectorAll('.pane'));
+    const rows = panes.map(p => Array.from(p.querySelectorAll('p')));
+    const N = rows[0].length;
+
+    // Segment boundaries per pane: paragraph i spans [B[i], B[i+1]).
+    // B[0] is 0 so the very top lines up; B[N] is where the trailing spacer starts.
+    let bounds = [];
+    function measure() {
+        // The trailing spacer is sized so the last paragraph can be scrolled exactly
+        // to the top of its pane, but no further.
+        panes.forEach(pane => { pane.querySelector('.tail').style.height = '0px'; });
+        bounds = panes.map((pane, k) => {
+            const b = rows[k].map(p => p.offsetTop);
+            b[0] = 0;
+            b.push(pane.querySelector('.tail').offsetTop);
+            return b;
+        });
+        panes.forEach((pane, k) => {
+            const b = bounds[k];
+            const lastBlock = b[N] - b[N - 1];
+            pane.querySelector('.tail').style.height =
+                Math.max(0, pane.clientHeight - lastBlock) + 'px';
+        });
+    }
+
+    // (paragraph index, fraction inside it) for a scroll offset
+    function locate(k, y) {
+        const b = bounds[k];
+        let i = 0;
+        while (i < N - 1 && y >= b[i + 1]) i++;
+        const span = b[i + 1] - b[i];
+        return { i, f: span > 0 ? Math.min(Math.max((y - b[i]) / span, 0), 1) : 0 };
+    }
+
+    function setActive(i) {
+        rows.forEach(r => r.forEach((p, j) => p.classList.toggle('active', j === i)));
+    }
+
+    let source = null, releaseTimer = null;
+
+    function sync(from) {
+        const k = panes.indexOf(from);
+        const { i, f } = locate(k, from.scrollTop);
+        panes.forEach((pane, m) => {
+            if (m === k) return;
+            const b = bounds[m];
+            pane.scrollTop = b[i] + f * (b[i + 1] - b[i]);
+        });
+        setActive(i);
+    }
+
+    panes.forEach(pane => {
+        // The pane the user is driving is the source until it goes quiet;
+        // scroll events fired by the synced panes are ignored.
+        const claim = () => { source = pane; };
+        pane.addEventListener('wheel', claim, { passive: true });
+        pane.addEventListener('touchstart', claim, { passive: true });
+        pane.addEventListener('pointerdown', claim, { passive: true });
+        pane.addEventListener('keydown', claim);
+
+        pane.addEventListener('scroll', () => {
+            if (source !== null && source !== pane) return;
+            source = pane;
+            sync(pane);
+            clearTimeout(releaseTimer);
+            releaseTimer = setTimeout(() => { source = null; }, 150);
+        }, { passive: true });
+    });
+
+    window.addEventListener('resize', () => { measure(); sync(panes[0]); });
+    window.addEventListener('load', () => { measure(); setActive(0); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+    measure();
+    setActive(0);
+})();
+</script>
+</body>
+</html>
